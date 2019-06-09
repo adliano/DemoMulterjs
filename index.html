@@ -10,9 +10,36 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    <form action="/profile" method="post" enctype="multipart/form-data">
-        <input type="file" name="getImg" />
-      </form>
+      <div class="container">
+          <div class="row mt-5">
+            <!--  -->
+            <!--   Single File -->
+            <form method="POST" action="/uploadfile" enctype="multipart/form-data">
+                <input type="file" name="singleFile" /><br>
+                <button type="submit" class="btn btn-primary gap mt-2">Submit</button>
+            </form>
+          </div>
+          <div class="row mt-5">
+            <!--  -->
+            <!-- MULTIPLE FILES -->
+            <form method="POST" action="/uploadmultiple" enctype="multipart/form-data">
+                <input type="file" name="multiFiles" multiple/><br>
+                <button type="submit" class="btn btn-primary gap mt-2">Submit</button>
+            </form>
+            <!--  -->
+            <!--  -->
+          </div>
+          <div class="row mt-5">
+            <!--  -->
+            <!-- Photos -->
+            <form method="POST" action="/uploadPhoto" enctype="multipart/form-data">
+                <input type="file" name="picture" accept="image/*"/><br>
+                <button type="submit" class="btn btn-primary gap mt-2">Submit</button>
+            </form>
+            <!--  -->
+            <!--  -->
+            </div>
+      </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
