@@ -1,7 +1,16 @@
 // Require the express
+// varible used to pass the file name
+let filename = ""
 const express = require('express')
 // Init the express
 const app = express()
+// SET Static path
+// https://expressjs.com/en/starter/static-files.html
+// https://www.tutorialspoint.com/expressjs/expressjs_static_files.htm
+app.use(express.static('./public'))
+
+// app.use('uploads', express.static('/'))
+
 // Requirer Multer
 const multer = require('multer')
 // Require PATH
@@ -17,14 +26,15 @@ and we'll also give the files a new identifier.
 */
 let storage = multer.diskStorage({
     // Set Destination
-    destination: function(req, file, cb){
-        cb(null, 'uploads/')
-    },
+    // Note: You are responsible for creating the directory when providing destination as a function.
+    //  When passing a string, multer will make sure that the directory is created for you.
+    destination: 'public/',
     // Set File Name
     filename: function(req, file, cb){
-        console.log(req);
+        console.log(file);
         // HERE is where we can decide the name of the file
-        cb(null, `myImageName.jpg`)
+        filename = `${file.fieldname}${Date.now()}.${file.mimetype.split('/')[1]}`
+        cb(null, filename)
 
         /* output of file
         { fieldname: 'singleFile',
@@ -35,8 +45,10 @@ let storage = multer.diskStorage({
 
     }
 })
+
 // Init Multer upload storage
 let upload = multer({storage: storage})
+
 
 
 /**************************************************
@@ -57,6 +69,7 @@ app.post('/uploadfile', upload.single('singleFile'),function(req, res, next){
     }
     // Else send the file
     //res.send(file)
+    res.json({pict: filename})
     res.redirect('/')
 })
 /**************************************************
@@ -87,3 +100,13 @@ app.listen(PORT, function () {
     console.log(`Server Listen to Port ${PORT}`);
     
 })
+
+// Adriano Alves
+// Jun 09 2019
+// Demo code using Multer js
+// https://www.npmjs.com/package/multer
+// run;
+// npm init -y
+// npm install express
+// npm install --save multer
+// npm install colors
